@@ -1,0 +1,135 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "CrossCutting/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/CrossCutting.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CrossCutting.dll": {}
+        }
+      },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "CrossCutting": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CrossCutting/1.0.0": {
+      "type": "project",
+      "path": "../CrossCutting/CrossCutting.csproj",
+      "msbuildProject": "../CrossCutting/CrossCutting.csproj"
+    },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Infrastructure/Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "CrossCutting >= 1.0.0",
+      "Domain >= 1.0.0",
+      "Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Felip\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\code-tests\\product-management\\Application\\Application.csproj",
+      "projectName": "Application",
+      "projectPath": "D:\\code-tests\\product-management\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\Felip\\.nuget\\packages\\",
+      "outputPath": "D:\\code-tests\\product-management\\Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Felip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "D:\\code-tests\\product-management\\CrossCutting\\CrossCutting.csproj": {
+              "projectPath": "D:\\code-tests\\product-management\\CrossCutting\\CrossCutting.csproj"
+            },
+            "D:\\code-tests\\product-management\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\code-tests\\product-management\\Domain\\Domain.csproj"
+            },
+            "D:\\code-tests\\product-management\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\code-tests\\product-management\\Infrastructure\\Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
