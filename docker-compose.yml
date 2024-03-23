@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: database-product-management
+    environment:
+      SA_PASSWORD: Sqlserver@123
+      ACCEPT_EULA: Y
+      MSSQL_PID: Developer
+      MSSQL_DBNAME: product_management
+    ports:
+      - "1433:1433"
