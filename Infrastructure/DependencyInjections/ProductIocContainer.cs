@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Contexts;
+using CrossCutting.Notifications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,7 @@ namespace Infrastructure.DependencyInjections
         
         private static void RegisterServices(IServiceCollection services)
         {
+            services.AddScoped<INotificationContext, NotificationContext>();
         }
     }
 }

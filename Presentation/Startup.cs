@@ -1,12 +1,15 @@
 using MediatR;
 using Application;
+using FluentValidation;
+using Presentation.Filters;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Domain.Utils.FluentValidations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.DependencyInjections;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation
 {
@@ -21,9 +24,18 @@ namespace Presentation
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.RegisterApiServices();
             services.RegisterProductDependencyInjections(Configuration);
+            
             services.AddMediatR(ApplicationAssemblyRef.Assembly);
-            services.AddControllers();
+            services.AddValidatorsFromAssembly(ApplicationAssemblyRef.Assembly, includeInternalTypes: true);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+           
+            services.AddControllers(opt =>
+            {
+                opt.Filters.Add(typeof(NotificationFilter));
+            });
+            
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Management", Version = "v1" }); });
         }
 
