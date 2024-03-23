@@ -33,6 +33,7 @@ namespace Presentation
            
             services.AddControllers(opt =>
             {
+                opt.Filters.Add(typeof(ExceptionFilter));
                 opt.Filters.Add(typeof(NotificationFilter));
             });
             
