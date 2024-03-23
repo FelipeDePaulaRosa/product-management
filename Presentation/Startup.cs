@@ -1,10 +1,12 @@
-using Infrastructure.DependencyInjections;
+using MediatR;
+using Application;
+using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Infrastructure.DependencyInjections;
 
 namespace Presentation
 {
@@ -20,12 +22,18 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterProductDependencyInjections(Configuration);
+            services.AddMediatR(ApplicationAssemblyRef.Assembly);
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Management", Version = "v1" }); });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
