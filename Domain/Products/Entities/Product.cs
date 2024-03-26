@@ -16,7 +16,6 @@ namespace Domain.Products.Entities
         
         public Product(
             string description,
-            bool isActive,
             DateTime manufactureDate,
             DateTime dueDate,
             string supplierCode,
@@ -24,7 +23,7 @@ namespace Domain.Products.Entities
             string supplierCnpj)
         {
             Description = description;
-            IsActive = isActive;
+            IsActive = true;
             ManufactureDate = manufactureDate;
             DueDate = dueDate;
             Supplier = new Supplier(supplierCode, supplierDescription, supplierCnpj);

@@ -24,7 +24,7 @@ namespace Application.Products.CreateProduct
             var code = await _productRepository.GetNextCode();
             product.SetCode(code);
             await _productRepository.CreateAsync(product);
-            return new CreateProductResponse();
+            return new CreateProductResponse(product.Id);
         }
     }
 }

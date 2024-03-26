@@ -21,5 +21,10 @@ namespace Infrastructure.Repositories.Products
                 .Select(x => x.Code)
                 .LastOrDefaultAsync() + 1;
         }
+
+        public async Task<Product> GetByIdOrDefaultAsync(Guid id)
+        {
+            return await DbSet.FindAsync(id);
+        }
     }
 }
