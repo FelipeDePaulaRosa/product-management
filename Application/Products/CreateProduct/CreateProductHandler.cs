@@ -1,7 +1,7 @@
 ﻿using MediatR;
+using AutoMapper;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using Domain.Products.Contracts;
 using Domain.Products.Entities;
 
@@ -21,6 +21,8 @@ namespace Application.Products.CreateProduct
         public async Task<CreateProductResponse> Handle(CreateProductRequest request, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<Product>(request);
+            var code = await _productRepository.GetNextCode();
+            product.SetCode(code);
             await _productRepository.CreateAsync(product);
             return new CreateProductResponse();
         }

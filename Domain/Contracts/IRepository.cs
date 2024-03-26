@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Domain.Utils.Entities;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Domain.Contracts
 {
@@ -13,5 +14,6 @@ namespace Domain.Contracts
         Task DeleteAsync(T entity, bool saveChanges = true);
         Task DeleteRangeAsync (IEnumerable<T> entity, bool saveChanges = true);
         Task SaveChangesAsync();
+        IQueryable<T> GetQueryable();
     }
 }

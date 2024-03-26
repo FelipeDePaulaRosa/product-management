@@ -5,7 +5,7 @@ namespace Domain.Products.Entities
 {
     public class Product : AggregateRoot<Guid>
     {
-        public string Code { get; }
+        public long Code { get; private set; }
         public string Description { get; private set; }
         public bool IsActive { get; private set; }
         public DateTime ManufactureDate { get; private set; }
@@ -28,6 +28,11 @@ namespace Domain.Products.Entities
             ManufactureDate = manufactureDate;
             DueDate = dueDate;
             Supplier = new Supplier(supplierCode, supplierDescription, supplierCnpj);
+        }
+        
+        public void SetCode(long code)
+        {
+            Code = code;
         }
     }
 }

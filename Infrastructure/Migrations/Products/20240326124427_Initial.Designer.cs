@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations.Products
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20240326020333_Initial")]
+    [Migration("20240326124427_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,8 @@ namespace Infrastructure.Migrations.Products
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("NEXT VALUE FOR ProductSequence");
+                    b.Property<long>("Code")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -49,6 +46,9 @@ namespace Infrastructure.Migrations.Products
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Code")
+                        .IsUnique();
+
                     b.ToTable("Product");
                 });
 
@@ -61,8 +61,8 @@ namespace Infrastructure.Migrations.Products
 
                             b1.Property<string>("Cnpj")
                                 .IsRequired()
-                                .HasMaxLength(14)
-                                .HasColumnType("nvarchar(14)");
+                                .HasMaxLength(18)
+                                .HasColumnType("nvarchar(18)");
 
                             b1.Property<string>("Code")
                                 .IsRequired()

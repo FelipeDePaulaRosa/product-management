@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
             await DbSet.AddAsync(entity);
 
             if (saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
 
             return entity;
         }
@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories
             await DbSet.AddRangeAsync(entities);
         
             if(saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
         
             return entities;
         }
@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories
             DbSet.Update(entity);
         
             if(saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
         }
 
         public async Task UpdateRangeAsync(IEnumerable<T> entities, bool saveChanges = true)
@@ -54,7 +54,7 @@ namespace Infrastructure.Repositories
             DbSet.UpdateRange(entities);
         
             if(saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
         }
 
         public async Task DeleteAsync(T entity, bool saveChanges = true)
@@ -62,7 +62,7 @@ namespace Infrastructure.Repositories
             DbSet.Remove(entity);
         
             if(saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
         }
     
         public async Task DeleteRangeAsync(IEnumerable<T> entities, bool saveChanges = true)
@@ -70,12 +70,17 @@ namespace Infrastructure.Repositories
             DbSet.RemoveRange(entities);
         
             if(saveChanges)
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
         }
     
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+        
+        public IQueryable<T> GetQueryable() 
+        {
+            return _context.Set<T>();
         }
     }
 }

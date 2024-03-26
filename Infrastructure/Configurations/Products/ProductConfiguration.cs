@@ -13,9 +13,10 @@ namespace Infrastructure.Configurations.Products
             builder.HasKey(x => x.Id);
             
             builder.Property(x => x.Code)
-                .IsRequired()
-                .ValueGeneratedOnAdd()
-                .HasDefaultValueSql("NEXT VALUE FOR ProductSequence");
+                .IsRequired();
+            
+            builder.HasIndex(x => x.Code)
+                .IsUnique();
             
             builder.Property(x => x.Description)
                 .IsRequired()
@@ -42,7 +43,7 @@ namespace Infrastructure.Configurations.Products
                 
                 supplier.Property(x => x.Cnpj)
                     .IsRequired()
-                    .HasMaxLength(14);
+                    .HasMaxLength(18);
             });
         }
     }
