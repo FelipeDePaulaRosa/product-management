@@ -10,6 +10,11 @@ namespace Infrastructure.Configurations.Products
         {
             builder.HasKey(x => x.Id);
             
+            builder.Property(x => x.Code)
+                .IsRequired()
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NEXT VALUE FOR product_management.dbo.ProductSequence");
+            
             builder.Property(x => x.Description)
                 .IsRequired()
                 .HasMaxLength(100);
