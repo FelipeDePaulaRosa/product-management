@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Application.Products.CreateProduct;
 using Application.Products.GetProductByCode;
+using Application.Products.GetProducts;
+using CrossCutting.Paged;
+using Presentation.Controllers.Products.DTOs;
 
 namespace Presentation.Controllers.Products
 {
@@ -25,6 +28,26 @@ namespace Presentation.Controllers.Products
             var request = new GetProductByCodeRequest(code);
             var product = await Sender.Send(request);
             return Ok(product);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> GetProducts([FromQuery] GetProductsDto dto)
+        {
+            var request = new GetProductsRequest(dto.PageNumber,
+                dto.PageSize,
+                dto.StartCode,
+                dto.EndCode,
+                dto.Description,
+                dto.SupplierCode,
+                dto.StartManufactureDate,
+                dto.EndManufactureDate,
+                dto.StartDueDate,
+                dto.EndDueDate,
+                dto.SupplierCnpj,
+                dto.SupplierDescription);
+            
+            var products = await Sender.Send(request);
+            return Ok(products);
         }
     }
 }

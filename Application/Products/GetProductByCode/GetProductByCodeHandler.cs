@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Domain.Products.Contracts;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
+using Domain.Products.Entities;
 
 namespace Application.Products.GetProductByCode
 {

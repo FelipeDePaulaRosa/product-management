@@ -2,6 +2,7 @@
 using Domain.Products.Entities;
 using Application.Products.CreateProduct;
 using Application.Products.GetProductByCode;
+using Application.Products.GetProducts;
 
 namespace Presentation.Configurations
 {
@@ -26,6 +27,10 @@ namespace Presentation.Configurations
             CreateMap<Product, GetProductByCodeResponse>()
                 .ForMember(dest => dest.Supplier, opt => opt.MapFrom(request =>
                     new GetProductSupplier(request.Supplier.Code, request.Supplier.Description, request.Supplier.Cnpj)));
+
+            CreateMap<Product, GetProducts>()
+                .ForMember(dest => dest.Supplier, opt => opt.MapFrom(request =>
+                    new GetProductsSupplier(request.Supplier.Code, request.Supplier.Description, request.Supplier.Cnpj)));
         }
     }
 }
