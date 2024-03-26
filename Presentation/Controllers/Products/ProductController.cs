@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Application.Products.GetProducts;
 using Application.Products.CreateProduct;
 using Application.Products.GetProductByCode;
-using Application.Products.GetProducts;
-using CrossCutting.Paged;
+using Application.Products.UpdateProduct;
 using Presentation.Controllers.Products.DTOs;
 
 namespace Presentation.Controllers.Products
@@ -48,6 +49,14 @@ namespace Presentation.Controllers.Products
             
             var products = await Sender.Send(request);
             return Ok(products);
+        }
+        
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] UpdateProductRequest request)
+        {
+            request.Id = id;
+            var updatedProduct = await Sender.Send(request);
+            return Ok(updatedProduct);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Domain.Products.Contracts;
 using Domain.Products.Entities;
@@ -24,7 +25,7 @@ namespace Infrastructure.Repositories.Products
 
         public async Task<Product> GetByIdOrDefaultAsync(Guid id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

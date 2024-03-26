@@ -24,7 +24,9 @@ namespace Application.Products.GetProducts
         
         public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
-            var query = _productRepository.GetQueryable();
+            var query = _productRepository
+                .GetQueryable()
+                .Where(x => x.IsActive == true);
             
             var products = await ApplyFilter(query, request)
                 .ProjectTo<GetProducts>(_mapper.ConfigurationProvider)
