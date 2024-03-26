@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Products.Entities;
 using Application.Products.CreateProduct;
+using Application.Products.GetProductByCode;
 
 namespace Presentation.Configurations
 {
@@ -21,6 +22,10 @@ namespace Presentation.Configurations
                 .ForMember(dest => dest.DueDate, opt => opt.MapFrom(x => x.DueDate.Date))
                 .ForMember(dest => dest.Supplier, opt => opt.MapFrom(request =>
                     new Supplier(request.SupplierCode, request.SupplierDescription, request.SupplierCnpj)));
+
+            CreateMap<Product, GetProductByCodeResponse>()
+                .ForMember(dest => dest.Supplier, opt => opt.MapFrom(request =>
+                    new GetProductSupplier(request.Supplier.Code, request.Supplier.Description, request.Supplier.Cnpj)));
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
+using System.Linq;
 using Domain.Exceptions;
+using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using CrossCutting.Notifications;
 
@@ -37,12 +38,13 @@ namespace Presentation.ApiResponses
             Errors = CreateNotifications(notifications);
         }
 
-        public static ApiProblemDetails CreateApiProblemDetails(Exception error)
+        public static ApiProblemDetails CreateApiProblemDetails(Exception error, HttpStatusCode code)
         {
             return error switch
             {
                 ApiApplicationException => CreateAsApplicationError(error),
                 ApiNotFoundException => CreateAsNotFoundError(error),
+                SqlException => CreateAsBadGatewayError(error),
                 _ => CreateAsInternalServerError(error)
             };
         }
@@ -80,6 +82,15 @@ namespace Presentation.ApiResponses
                 "One or more objects were not found",
                 error,
                 HttpStatusCode.NotFound);
+        }
+
+        private static ApiProblemDetails CreateAsBadGatewayError(Exception error)
+        {
+            return new ApiProblemDetails(
+                "Bad gateway error",
+                "One or more errors occurred in the database.",
+                error,
+                HttpStatusCode.BadGateway);
         }
 
         private static List<ApiError> CreateError(Exception error)
