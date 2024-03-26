@@ -19,7 +19,7 @@ namespace Infrastructure.Migrations.Products
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Domain.Products.Product", b =>
+            modelBuilder.Entity("Domain.Products.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,7 +29,7 @@ namespace Infrastructure.Migrations.Products
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("NEXT VALUE FOR product_management.dbo.ProductSequence");
+                        .HasDefaultValueSql("NEXT VALUE FOR ProductSequence");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -47,12 +47,12 @@ namespace Infrastructure.Migrations.Products
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Domain.Products.Product", b =>
+            modelBuilder.Entity("Domain.Products.Entities.Product", b =>
                 {
-                    b.OwnsOne("Domain.Products.Supplier", "Supplier", b1 =>
+                    b.OwnsOne("Domain.Products.Entities.Supplier", "Supplier", b1 =>
                         {
                             b1.Property<Guid>("ProductId")
                                 .HasColumnType("uniqueidentifier");
@@ -74,7 +74,7 @@ namespace Infrastructure.Migrations.Products
 
                             b1.HasKey("ProductId");
 
-                            b1.ToTable("Products");
+                            b1.ToTable("Product");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");

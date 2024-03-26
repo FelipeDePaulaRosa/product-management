@@ -1,4 +1,4 @@
-﻿using Domain.Products;
+﻿using Domain.Products.Entities;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Configurations.Products;
 
@@ -10,7 +10,7 @@ namespace Infrastructure.Contexts
         {
         }
         
-        DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

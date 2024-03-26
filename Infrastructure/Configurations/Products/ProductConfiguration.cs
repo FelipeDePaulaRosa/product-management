@@ -1,4 +1,4 @@
-﻿using Domain.Products;
+﻿using Domain.Products.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,12 +8,14 @@ namespace Infrastructure.Configurations.Products
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("Product");
+            
             builder.HasKey(x => x.Id);
             
             builder.Property(x => x.Code)
                 .IsRequired()
                 .ValueGeneratedOnAdd()
-                .HasDefaultValueSql("NEXT VALUE FOR product_management.dbo.ProductSequence");
+                .HasDefaultValueSql("NEXT VALUE FOR ProductSequence");
             
             builder.Property(x => x.Description)
                 .IsRequired()

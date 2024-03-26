@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Utils.Entities;
 
-namespace Domain.Products
+namespace Domain.Products.Entities
 {
     public class Product : AggregateRoot<Guid>
     {
