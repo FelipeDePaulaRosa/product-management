@@ -1,7 +1,8 @@
 ﻿using Infrastructure.Contexts;
-using CrossCutting.Notifications;
+using Domain.Products.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Infrastructure.Repositories.Products;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.DependencyInjections
@@ -28,7 +29,7 @@ namespace Infrastructure.DependencyInjections
         
         private static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<INotificationContext, NotificationContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

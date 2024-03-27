@@ -10,6 +10,7 @@ using Domain.Utils.FluentValidations;
 using Microsoft.Extensions.Configuration;
 using Infrastructure.DependencyInjections;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.Configurations;
 
 namespace Presentation
 {
@@ -24,6 +25,7 @@ namespace Presentation
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(AutoMapperConfig));
             services.RegisterApiServices();
             services.RegisterProductDependencyInjections(Configuration);
             
@@ -33,6 +35,7 @@ namespace Presentation
            
             services.AddControllers(opt =>
             {
+                opt.Filters.Add(typeof(ExceptionFilter));
                 opt.Filters.Add(typeof(NotificationFilter));
             });
             

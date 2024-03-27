@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Products.Entities;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.Configurations.Products;
 
 namespace Infrastructure.Contexts
 {
@@ -7,10 +9,12 @@ namespace Infrastructure.Contexts
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
         {
         }
+        
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
