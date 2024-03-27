@@ -9,7 +9,7 @@ namespace CrossCutting.FluentValidations.Cnpj
             if (string.IsNullOrWhiteSpace(cnpj))
                 return false;
 
-            const string regex = @"^(\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2})|(\d{14})$";
+            const string regex = @"\d{2}.\d{3}.\d{3}/\d{4}-\d{2}";
             return new Regex(regex).IsMatch(cnpj);
         }
     }
