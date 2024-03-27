@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Products.GetProducts;
 using Application.Products.CreateProduct;
 using Application.Products.GetProductByCode;
+using Application.Products.SoftDeleteProduct;
 using Application.Products.UpdateProduct;
 using Presentation.Controllers.Products.DTOs;
 
@@ -57,6 +58,14 @@ namespace Presentation.Controllers.Products
             request.Id = id;
             var updatedProduct = await Sender.Send(request);
             return Ok(updatedProduct);
+        }
+        
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> SoftDeleteProduct([FromRoute] Guid id)
+        {
+            var request = new SoftDeleteProductRequest(id);
+            await Sender.Send(request);
+            return NoContent();
         }
     }
 }

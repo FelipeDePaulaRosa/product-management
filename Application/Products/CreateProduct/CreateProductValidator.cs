@@ -20,7 +20,7 @@ namespace Application.Products.CreateProduct
             
             RuleFor(x => x)
                 .Must(ProductDescriptionIsNotDuplicated)
-                .WithMessage("Já existe um producto cadastrado com essa descrição");
+                .WithMessage("Já existe um produto cadastrado com essa descrição");
 
             RuleFor(x => x)
                 .Must(x => x.ManufactureDate < x.DueDate)

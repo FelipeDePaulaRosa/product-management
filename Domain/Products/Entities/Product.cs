@@ -33,5 +33,10 @@ namespace Domain.Products.Entities
         {
             Code = code;
         }
+
+        public void SoftDelete()
+        {
+            IsActive = false;
+        }
     }
 }

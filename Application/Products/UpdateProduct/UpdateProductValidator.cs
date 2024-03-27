@@ -20,7 +20,7 @@ namespace Application.Products.UpdateProduct
             
             RuleFor(x => x)
                 .Must(ProductDescriptionIsNotDuplicated)
-                .WithMessage("Já existe um producto cadastrado com essa descrição");
+                .WithMessage("Já existe um produto cadastrado com essa descrição");
 
             RuleFor(x => x)
                 .Must(x => x.ManufactureDate < x.DueDate)
@@ -44,7 +44,7 @@ namespace Application.Products.UpdateProduct
             var descriptionIsDuplicated = _productRepository
                 .GetQueryable()
                 .AsNoTracking()
-                .Any(x => x.Description.Equals(request.Description));
+                .Any(x => x.Id != request.Id && x.Description.Equals(request.Description));
             
             return !descriptionIsDuplicated;
         }
